@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import mainwindow.SearchBox ?>
+<?import mainwindow.SavedBox ?>
+<fx:root type="javafx.scene.layout.GridPane" fx:id="mainWindow" xmlns:fx="http://javafx.com/fxml" hgap="10" vgap="10">
+	<padding><Insets top="25" right="25" bottom="25" left="25"/></padding>
+	<SearchBox fx:id="searchBox" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+	<SavedBox fx:id="savedBox" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+</fx:root>
+
+
