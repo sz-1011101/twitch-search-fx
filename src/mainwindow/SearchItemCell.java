@@ -1,13 +1,13 @@
 package mainwindow;
 
+import twitch.TwitchStream;
 import javafx.geometry.HPos;
-import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.layout.GridPane;
 
-public class SearchItemCell extends ListCell<String> {
+public class SearchItemCell extends ListCell<TwitchStream> {
 
 	private GridPane cellGrid = new GridPane();
 	private Button executeButton = new Button();
@@ -33,12 +33,12 @@ public class SearchItemCell extends ListCell<String> {
 	}
 
 	@Override
-	protected void updateItem(String item, boolean empty) {
+	protected void updateItem(TwitchStream item, boolean empty) {
 		if (empty || item == null) {
 			cellNameLabel.setText(null);
 			setGraphic(null);
 		} else {
-			cellNameLabel.setText(item);
+			cellNameLabel.setText(item.getName());
 			setGraphic(cellGrid);
 		}
 	}

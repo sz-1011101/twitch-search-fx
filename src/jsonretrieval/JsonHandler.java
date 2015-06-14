@@ -8,7 +8,7 @@ import com.google.gson.Gson;
 
 public class JsonHandler {
 	Gson gson = new Gson();
-	private final int LIMIT = 100;
+	private final int LIMIT = 20;
 
 	/**
 	 * Returns TwitchStreamContainer with retrieved data from the searchterm

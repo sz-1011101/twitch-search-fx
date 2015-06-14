@@ -20,7 +20,8 @@ import javafx.util.Callback;
 
 public class SearchBox extends VBox implements Initializable {
 
-	private ObservableList<String> list = FXCollections.observableArrayList();
+	private ObservableList<TwitchStream> list = FXCollections
+			.observableArrayList();
 
 	@FXML
 	private ListView searchListView;
@@ -34,10 +35,10 @@ public class SearchBox extends VBox implements Initializable {
 
 		// searchListView shall use the SearchItemCell to populate the listVIew
 		searchListView
-				.setCellFactory(new Callback<ListView<String>, ListCell<String>>() {
+				.setCellFactory(new Callback<ListView<String>, ListCell<TwitchStream>>() {
 
 					@Override
-					public ListCell<String> call(ListView<String> param) {
+					public ListCell<TwitchStream> call(ListView<String> param) {
 						return new SearchItemCell();
 					}
 
@@ -62,14 +63,12 @@ public class SearchBox extends VBox implements Initializable {
 			TwitchBrowser twitchBrowser = new TwitchBrowser();
 			ArrayList<TwitchStream> searchResult = twitchBrowser
 					.searchTerm(searchTextField.getText());
-
+			
+			list.clear();
 			if (searchResult != null) {
-				list.clear();
-				for (TwitchStream stream : searchResult) {
-					list.add(stream.getName() + " " + "v: "
-							+ stream.getViewers());
-				}
+				list.addAll(searchResult);
 			}
+
 		}
 	}
 }
