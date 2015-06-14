@@ -26,10 +26,12 @@ public class SearchItemCell extends ListCell<TwitchStream> {
 		cellGrid.add(cellNameLabel, 0, 0);
 
 		cellGrid.add(executeButton, 1, 0);		
-		executeButton.setText(">");
-
+		executeButton.setText("open");
+		executeButton.autosize();
+		
 		cellGrid.add(saveButton, 2, 0);
-		executeButton.setText("s");
+		saveButton.setText("save");
+		saveButton.autosize();
 	}
 
 	@Override
