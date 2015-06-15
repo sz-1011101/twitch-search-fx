@@ -7,6 +7,7 @@ import java.util.Random;
 
 import com.google.gson.Gson;
 
+import twitch.StreamInfo.StreamQuality;
 import util.URLUtility;
 
 public class TwitchStream {
@@ -79,8 +80,14 @@ public class TwitchStream {
 		// check if stream is online and we got a m3u playlist of streams
 		// TODO parsing and setting the object
 		if (usherCallResponse.startsWith("#EXTM3U")) {
-			System.out.println(usherCallResponse);
-			return true;
+			try {
+				info = parseStreams(usherCallResponse);
+				return true;
+			} catch (MalformedURLException e) {
+				e.printStackTrace();
+				return false;
+			}
+
 		}
 
 		System.out.println("Stream url's could not be retrieved");
@@ -103,6 +110,51 @@ public class TwitchStream {
 				+ rNumber;
 
 		return new URL(usherCall);
+	}
+
+	private StreamInfo parseStreams(String twitchM3u)
+			throws MalformedURLException {
+
+		StreamInfo result = new StreamInfo();
+
+		if (twitchM3u == null || twitchM3u == "") {
+			return null;
+		}
+
+		String[] splitLines = twitchM3u.split("#EXT-X-MEDIA:TYPE=VIDEO,");
+
+		for (String s : splitLines) {
+			String quality = subStringToGivenDelimiter(s, "GROUP-ID=\"", "\",");
+			String videoURL = subStringToGivenDelimiter(s, "VIDEO=\"" + quality
+					+ "\"", null);
+			if (videoURL != null) {
+				result.qualities.add(result.new StreamQuality(quality, new URL(
+						videoURL)));
+			}
+		}
+
+		if (!result.qualities.isEmpty()) {
+			return null;
+		}
+
+		return result;
+	}
+
+	private String subStringToGivenDelimiter(String input, String lookfor,
+			String delimiter) {
+
+		int lookforIndex = input.indexOf(lookfor);
+		String cutString = null;
+
+		if (lookforIndex >= 0) {
+			cutString = input.substring(lookforIndex + lookfor.length());
+			if (delimiter != null) {
+				cutString = cutString
+						.substring(0, cutString.indexOf(delimiter));
+			}
+		}
+
+		return cutString;
 	}
 
 	class TokenResponseContainer {

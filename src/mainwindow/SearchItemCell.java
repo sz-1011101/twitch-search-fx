@@ -36,7 +36,8 @@ public class SearchItemCell extends ListCell<TwitchStream> {
 
 			@Override
 			public void handle(ActionEvent event) {
-				System.out.println("Execute button pressed"); //Dummy action
+				System.out.println("Execute button pressed"); // Dummy action
+				getItem().retrieveStreamData();
 			}
 
 		});
@@ -45,12 +46,12 @@ public class SearchItemCell extends ListCell<TwitchStream> {
 		cellGrid.add(saveButton, 2, 0);
 		saveButton.setText("save");
 		saveButton.autosize();
-		
+
 		saveButton.setOnAction(new EventHandler<ActionEvent>() {
 
 			@Override
 			public void handle(ActionEvent event) {
-				System.out.println("Save button pressed"); //Dummy action
+				System.out.println("Save button pressed"); // Dummy action
 			}
 
 		});
@@ -62,7 +63,8 @@ public class SearchItemCell extends ListCell<TwitchStream> {
 			cellNameLabel.setText(null);
 			setGraphic(null);
 		} else {
-			cellNameLabel.setText(item.getName() + "viewers: " + item.getViewers());
+			cellNameLabel.setText(item.getName() + "viewers: "
+					+ item.getViewers());
 			setGraphic(cellGrid);
 		}
 		this.setItem(item);

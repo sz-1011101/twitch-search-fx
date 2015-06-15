@@ -6,9 +6,23 @@ import java.util.List;
 
 public class StreamInfo {
 	List<StreamQuality> qualities = new ArrayList<>();
-	
+
 	class StreamQuality {
-		String quality;
-		URL streamURL;
+
+		private String quality;
+		private URL streamURL;
+
+		public StreamQuality(String quality, URL streamURL) {
+			this.quality = quality;
+			this.streamURL = streamURL;
+		}
+
+		public String getQuality() {
+			return quality;
+		}
+
+		public URL getStreamURL() {
+			return streamURL;
+		}
 	}
 }
