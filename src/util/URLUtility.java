@@ -4,15 +4,19 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
-
+/**
+ * Utility class containing URL static utility methods.
+ * @author sebastian
+ *
+ */
 public class URLUtility {
+	
 	/**
 	 * Retrieve content at url as String
 	 * @param url the given url to read retrieve from
 	 * @return String with content at url
 	 * @throws IOException
 	 */
-	 
 	public static String retrieveURL(URL url) throws IOException {
 		
 		InputStreamReader stream = new InputStreamReader(url.openStream());

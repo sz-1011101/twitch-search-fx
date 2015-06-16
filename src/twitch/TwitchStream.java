@@ -10,7 +10,14 @@ import com.google.gson.Gson;
 import twitch.StreamInfo.StreamQuality;
 import util.URLUtility;
 
+/**
+ * A users twitch stream.
+ * 
+ * @author sebastian
+ *
+ */
 public class TwitchStream {
+
 	private String name;
 	private URL url;
 	private String gameName;
@@ -50,7 +57,7 @@ public class TwitchStream {
 	 * .ch/2014/01/find-video-url-of-twitch-tv-live-streams-or-past-broadcasts/
 	 * for showing how to retrieve twitch stream info.
 	 * 
-	 * @return true if operation successful, false otherwise
+	 * @return True if operation successful, false otherwise
 	 */
 	public boolean retrieveStreamData() {
 
@@ -94,11 +101,32 @@ public class TwitchStream {
 		return false;
 	}
 
+	/**
+	 * Returns the URL which can be used to obtain a token for a given channel
+	 * 
+	 * @param channel
+	 *            The channel to obtain the token for
+	 * @return URL that will return a token
+	 * @throws MalformedURLException
+	 */
 	private URL getTokenCall(String channel) throws MalformedURLException {
 		return new URL("http://api.twitch.tv/api/channels/" + channel
 				+ "/access_token");
 	}
 
+	/**
+	 * Returns the URL that can be used to obtain a m3u playlist which contains
+	 * stream info>
+	 * 
+	 * @param channel
+	 *            Given channel
+	 * @param token
+	 *            Token for the given channel (obtain with getTokenCall())
+	 * @param signature
+	 *            Signature of the token
+	 * @return URL to call for m3u list
+	 * @throws MalformedURLException
+	 */
 	private URL getUsherCall(String channel, String token, String signature)
 			throws MalformedURLException {
 		Random random = new Random(System.currentTimeMillis());
@@ -112,6 +140,14 @@ public class TwitchStream {
 		return new URL(usherCall);
 	}
 
+	/**
+	 * Returns StreamInfo Object parsed from m3u gotten via getUsherCall().
+	 * 
+	 * @param twitchM3u
+	 *            M3u playlist
+	 * @return StreamInfo object with info from twitchM3u, null if error occurs.
+	 * @throws MalformedURLException
+	 */
 	private StreamInfo parseStreams(String twitchM3u)
 			throws MalformedURLException {
 
@@ -120,9 +156,10 @@ public class TwitchStream {
 		if (twitchM3u == null || twitchM3u == "") {
 			return null;
 		}
-
+		// split into array of lines.
 		String[] splitLines = twitchM3u.split("#EXT-X-MEDIA:TYPE=VIDEO,");
 
+		// Retrieve quality and URL
 		for (String s : splitLines) {
 			String quality = subStringToGivenDelimiter(s, "GROUP-ID=\"", "\",");
 			String videoURL = subStringToGivenDelimiter(s, "VIDEO=\"" + quality
@@ -140,6 +177,19 @@ public class TwitchStream {
 		return result;
 	}
 
+	/**
+	 * Given a string, looks for a substring and returns string after the
+	 * substring to delimiter.
+	 * 
+	 * @param input
+	 *            The given string
+	 * @param lookfor
+	 *            Look for this string in the given inputstring
+	 * @param delimiter
+	 *            Only look at substring until this string occurs. Will return
+	 *            whole string if null
+	 * @return resulting string
+	 */
 	private String subStringToGivenDelimiter(String input, String lookfor,
 			String delimiter) {
 
@@ -157,6 +207,12 @@ public class TwitchStream {
 		return cutString;
 	}
 
+	/**
+	 * This class represents the Json retrieved when calling URL for token.
+	 * 
+	 * @author sebastian
+	 *
+	 */
 	class TokenResponseContainer {
 		String token;
 		String sig;

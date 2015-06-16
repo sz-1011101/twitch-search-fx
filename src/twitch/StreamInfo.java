@@ -4,9 +4,24 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This class wraps info (stream URLs, quality options, etc.) that can be
+ * retrieved from the m3u response of twitch
+ * 
+ * @author sebastian
+ *
+ */
 public class StreamInfo {
+
 	List<StreamQuality> qualities = new ArrayList<>();
 
+	/**
+	 * Represents a stream quality (low, medium, high) and the URL to open
+	 * stream with that quality.
+	 * 
+	 * @author sebastian
+	 *
+	 */
 	class StreamQuality {
 
 		private String quality;
