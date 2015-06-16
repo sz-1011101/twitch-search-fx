@@ -24,7 +24,7 @@ public class SearchBox extends VBox implements Initializable {
 			.observableArrayList();
 
 	@FXML
-	private ListView searchListView;
+	private ListView<TwitchStream> searchListView;
 
 	@FXML
 	private TextField searchTextField;
@@ -35,10 +35,11 @@ public class SearchBox extends VBox implements Initializable {
 
 		// searchListView shall use the SearchItemCell to populate the listVIew
 		searchListView
-				.setCellFactory(new Callback<ListView<String>, ListCell<TwitchStream>>() {
+				.setCellFactory(new Callback<ListView<TwitchStream>, ListCell<TwitchStream>>() {
 
 					@Override
-					public ListCell<TwitchStream> call(ListView<String> param) {
+					public ListCell<TwitchStream> call(
+							ListView<TwitchStream> param) {
 						return new SearchItemCell();
 					}
 
@@ -63,7 +64,7 @@ public class SearchBox extends VBox implements Initializable {
 			TwitchBrowser twitchBrowser = new TwitchBrowser();
 			ArrayList<TwitchStream> searchResult = twitchBrowser
 					.searchTerm(searchTextField.getText());
-			
+
 			list.clear();
 			if (searchResult != null) {
 				list.addAll(searchResult);

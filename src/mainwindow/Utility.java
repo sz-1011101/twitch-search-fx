@@ -3,6 +3,12 @@ package mainwindow;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 
+/**
+ * JavaFX Utility methods.
+ * 
+ * @author sebastian
+ *
+ */
 public class Utility {
 	/**
 	 * Load a fxmlFile for the given Node

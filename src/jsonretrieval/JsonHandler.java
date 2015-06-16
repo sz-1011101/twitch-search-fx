@@ -1,12 +1,17 @@
 package jsonretrieval;
 
-import java.io.IOException;
-
 import twitch.TwitchStreamContainerJson;
 
 import com.google.gson.Gson;
 
+/**
+ * Handles all things Json related of the twitch API.
+ * 
+ * @author sebastian
+ *
+ */
 public class JsonHandler {
+
 	Gson gson = new Gson();
 	private final int LIMIT = 20;
 
@@ -24,8 +29,8 @@ public class JsonHandler {
 		resultJson = Retriever.getSearchResultsJson(term, LIMIT);
 		if (resultJson == null) {
 			return null;
-		} 
-		
+		}
+
 		return gson.fromJson(resultJson, TwitchStreamContainerJson.class);
 	}
 }

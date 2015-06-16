@@ -7,7 +7,6 @@ import java.util.Random;
 
 import com.google.gson.Gson;
 
-import twitch.StreamInfo.StreamQuality;
 import util.URLUtility;
 
 /**
