@@ -29,7 +29,6 @@ public class SearchBox extends VBox implements Initializable {
 	@FXML
 	private TextField searchTextField;
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 
