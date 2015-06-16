@@ -10,6 +10,7 @@
 	<padding><Insets top="25" right="25" bottom="25" left="25"/></padding>
 	<SearchBox fx:id="searchBox" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
 	<SavedBox fx:id="savedBox" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+	<Button text="Configure" GridPane.columnIndex="0" GridPane.rowIndex="1" onAction="#handleConfigureButtonAction"/>
 </fx:root>
 
 

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<fx:root type="javafx.scene.layout.GridPane" fx:id="configWindow" xmlns:fx="http://javafx.com/fxml" hgap="10" vgap="10">
+	<padding><Insets top="25" right="25" bottom="25" left="25"/></padding>
+	<Label text="Player: " GridPane.columnIndex = "0" GridPane.rowIndex = "0" />
+	<TextField fx:id = "playerPath" GridPane.columnIndex = "1" GridPane.rowIndex = "0" />
+	<Button text="Set" GridPane.columnIndex =  "2" GridPane.rowIndex = "0" onAction = "#handleSetPlayerButtonAction"/>
+</fx:root>
+

@@ -1,7 +1,12 @@
 package mainwindow;
 
+import configwindow.ConfigWindow;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.layout.GridPane;
+import javafx.stage.Stage;
 
 public class MainWindow extends GridPane {
 	@FXML
@@ -12,5 +17,18 @@ public class MainWindow extends GridPane {
 
 	public MainWindow() {
 		Utility.loadFXMLasRoot("main_window.fxml", this);
+	}
+
+	@FXML
+	protected void handleConfigureButtonAction(ActionEvent event) {
+		System.out.println("ConfigureButton pressed");
+		Parent secondary = new ConfigWindow();
+
+		Stage configStage = new Stage();
+		Scene scene = new Scene(secondary, 400, 100);
+
+		configStage.setTitle("Configuration");
+		configStage.setScene(scene);
+		configStage.show();
 	}
 }
