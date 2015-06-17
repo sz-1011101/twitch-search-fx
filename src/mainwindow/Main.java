@@ -1,5 +1,6 @@
 package mainwindow;
-	
+
+import application.Configuration;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import javafx.scene.Parent;
@@ -9,17 +10,24 @@ public class Main extends Application {
 	@Override
 	public void start(Stage stage) {
 		try {
-			Parent root = new MainWindow();
-			
-			Scene scene = new Scene(root,600,400);
+
+			Configuration config = Configuration.loadConfiguration();
+
+			// No config available, use default config
+			if (config == null) {
+				config = new Configuration();
+			}
+			Parent root = new MainWindow(config);
+
+			Scene scene = new Scene(root, 600, 400);
 			stage.setTitle("Twitch Browser 0.01");
 			stage.setScene(scene);
 			stage.show();
-		} catch(Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public static void main(String[] args) {
 		launch(args);
 	}

@@ -9,5 +9,6 @@
 	<Label text="Player: " GridPane.columnIndex = "0" GridPane.rowIndex = "0" />
 	<TextField fx:id = "playerPath" GridPane.columnIndex = "1" GridPane.rowIndex = "0" />
 	<Button text="Set" GridPane.columnIndex =  "2" GridPane.rowIndex = "0" onAction = "#handleSetPlayerButtonAction"/>
+	<Button text="Save" GridPane.columnIndex =  "0" GridPane.rowIndex = "1" onAction = "#handleSaveButtonAction"/>
 </fx:root>
 

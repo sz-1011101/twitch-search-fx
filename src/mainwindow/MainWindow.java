@@ -1,5 +1,6 @@
 package mainwindow;
 
+import application.Configuration;
 import configwindow.ConfigWindow;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -15,14 +16,17 @@ public class MainWindow extends GridPane {
 	@FXML
 	SavedBox savedBox;
 
-	public MainWindow() {
+	Configuration config;
+
+	public MainWindow(Configuration config) {
+		this.config = config;
 		Utility.loadFXMLasRoot("main_window.fxml", this);
 	}
 
 	@FXML
 	protected void handleConfigureButtonAction(ActionEvent event) {
 		System.out.println("ConfigureButton pressed");
-		Parent secondary = new ConfigWindow();
+		Parent secondary = new ConfigWindow(config);
 
 		Stage configStage = new Stage();
 		Scene scene = new Scene(secondary, 400, 100);
