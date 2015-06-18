@@ -17,11 +17,13 @@ public class Main extends Application {
 			if (config == null) {
 				config = new Configuration();
 			}
-			Parent root = new MainWindow(config);
+			Parent root = new MainWindow();
 
 			Scene scene = new Scene(root, 600, 400);
-			stage.setTitle("Twitch Browser 0.01");
+			stage.setTitle("Twitch Browser 0.1");
 			stage.setScene(scene);
+
+			((MainWindow) root).setConfig(config);
 			stage.show();
 		} catch (Exception e) {
 			e.printStackTrace();

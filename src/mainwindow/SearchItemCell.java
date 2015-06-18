@@ -1,25 +1,35 @@
 package mainwindow;
 
+import application.Configuration;
+import qualityselector.QualitySelector;
+import twitch.StreamInfo;
 import twitch.TwitchStream;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.HPos;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.layout.GridPane;
+import javafx.stage.Stage;
 
 public class SearchItemCell extends ListCell<TwitchStream> {
 
+	private Configuration config;
+	
 	private GridPane cellGrid = new GridPane();
 	private Button executeButton = new Button();
 	private Button saveButton = new Button();
 	private Label cellNameLabel = new Label();
 
-	public SearchItemCell() {
+	public SearchItemCell(Configuration config) {
 		super();
+		this.config = config;
+		
 		setText(null); // Set normal text null, we use the label for that
-
+		
 		// TODO make this work...
 		GridPane.setHalignment(cellNameLabel, HPos.LEFT);
 		GridPane.setHalignment(executeButton, HPos.RIGHT);
@@ -38,8 +48,12 @@ public class SearchItemCell extends ListCell<TwitchStream> {
 			public void handle(ActionEvent event) {
 				System.out.println("Execute button pressed"); // Dummy action
 				getItem().retrieveStreamData();
-			}
+				StreamInfo info = getItem().getInfo();
 
+				if (info != null) {
+					openQualitySelector(info);
+				}
+			}
 		});
 
 		// This button saves the streams properties locally
@@ -69,4 +83,19 @@ public class SearchItemCell extends ListCell<TwitchStream> {
 		}
 		this.setItem(item);
 	}
+
+	private void openQualitySelector(StreamInfo info) {
+		Parent secondary = new QualitySelector();
+		Stage selectorStage = new Stage();
+
+		Scene scene = new Scene(secondary, 200, 200);
+		selectorStage.setScene(scene);
+
+		((QualitySelector) secondary).setConfig(config);
+		// give data to the QualitySelector
+		((QualitySelector) secondary).passStreamInfo(info);
+		selectorStage.setTitle("Select quality");
+		selectorStage.show();
+	}
+	
 }

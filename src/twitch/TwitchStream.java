@@ -163,13 +163,14 @@ public class TwitchStream {
 			String quality = subStringToGivenDelimiter(s, "GROUP-ID=\"", "\",");
 			String videoURL = subStringToGivenDelimiter(s, "VIDEO=\"" + quality
 					+ "\"", null);
+
 			if (videoURL != null) {
 				result.qualities.add(result.new StreamQuality(quality, new URL(
 						videoURL)));
 			}
 		}
 
-		if (!result.qualities.isEmpty()) {
+		if (result.qualities.isEmpty()) {
 			return null;
 		}
 

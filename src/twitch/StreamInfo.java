@@ -14,6 +14,10 @@ import java.util.List;
 public class StreamInfo {
 
 	List<StreamQuality> qualities = new ArrayList<>();
+	
+	public List<StreamQuality> getQualities() {
+		return qualities;
+	}
 
 	/**
 	 * Represents a stream quality (low, medium, high) and the URL to open
@@ -22,7 +26,7 @@ public class StreamInfo {
 	 * @author sebastian
 	 *
 	 */
-	class StreamQuality {
+	public class StreamQuality {
 
 		private String quality;
 		private URL streamURL;
@@ -39,5 +43,10 @@ public class StreamInfo {
 		public URL getStreamURL() {
 			return streamURL;
 		}
+	}
+
+	@Override
+	public String toString() {
+		return "StreamInfo [qualities=" + qualities + "]";
 	}
 }

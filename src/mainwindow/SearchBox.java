@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import twitch.TwitchStream;
+import application.Configuration;
 import application.TwitchBrowser;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -19,7 +20,9 @@ import javafx.scene.layout.VBox;
 import javafx.util.Callback;
 
 public class SearchBox extends VBox implements Initializable {
-
+	
+	private Configuration config;
+	
 	private ObservableList<TwitchStream> list = FXCollections
 			.observableArrayList();
 
@@ -39,7 +42,7 @@ public class SearchBox extends VBox implements Initializable {
 					@Override
 					public ListCell<TwitchStream> call(
 							ListView<TwitchStream> param) {
-						return new SearchItemCell();
+						return new SearchItemCell(config);
 					}
 
 				});
@@ -70,5 +73,9 @@ public class SearchBox extends VBox implements Initializable {
 			}
 
 		}
+	}
+	
+	public void setConfig(Configuration config) {
+		this.config = config;
 	}
 }

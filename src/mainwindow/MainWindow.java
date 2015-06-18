@@ -10,16 +10,16 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 public class MainWindow extends GridPane {
+	
+	private Configuration config;
+	
 	@FXML
 	SearchBox searchBox;
 
 	@FXML
 	SavedBox savedBox;
 
-	Configuration config;
-
-	public MainWindow(Configuration config) {
-		this.config = config;
+	public MainWindow() {
 		Utility.loadFXMLasRoot("main_window.fxml", this);
 	}
 
@@ -34,5 +34,10 @@ public class MainWindow extends GridPane {
 		configStage.setTitle("Configuration");
 		configStage.setScene(scene);
 		configStage.show();
+	}
+
+	public void setConfig(Configuration config) {
+		this.config = config;
+		searchBox.setConfig(config);
 	}
 }
