@@ -1,6 +1,6 @@
 package mainwindow;
 
-import application.Configuration;
+import application.ObservableTwitchBrowser;
 import qualityselector.QualitySelector;
 import twitch.StreamInfo;
 import twitch.TwitchStream;
@@ -16,17 +16,19 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 public class SearchItemCell extends ListCell<TwitchStream> {
-	
+
+	private ObservableTwitchBrowser browser;
+
 	private GridPane cellGrid = new GridPane();
 	private Button executeButton = new Button();
 	private Button saveButton = new Button();
 	private Label cellNameLabel = new Label();
 
-	public SearchItemCell(Configuration config) {
+	public SearchItemCell() {
 		super();
-		
+
 		setText(null); // Set normal text null, we use the label for that
-		
+
 		// TODO make this work...
 		GridPane.setHalignment(cellNameLabel, HPos.LEFT);
 		GridPane.setHalignment(executeButton, HPos.RIGHT);
@@ -63,6 +65,8 @@ public class SearchItemCell extends ListCell<TwitchStream> {
 			@Override
 			public void handle(ActionEvent event) {
 				System.out.println("Save button pressed"); // Dummy action
+				browser.addToSavedStreams(getItem());
+				browser.notifyInvalidated();
 			}
 
 		});
@@ -75,7 +79,7 @@ public class SearchItemCell extends ListCell<TwitchStream> {
 			setGraphic(null);
 		} else {
 			String displayText = item.getName() + "\nViewers: "
-					+ item.getViewers() + "\nGame: "+item.getGameName();
+					+ item.getViewers() + "\nGame: " + item.getGameName();
 			cellNameLabel.setText(displayText);
 			setGraphic(cellGrid);
 		}
@@ -94,5 +98,9 @@ public class SearchItemCell extends ListCell<TwitchStream> {
 		selectorStage.setTitle("Select quality");
 		selectorStage.show();
 	}
-	
+
+	public void setTwitchBrowser(ObservableTwitchBrowser browser) {
+		this.browser = browser;
+	}
+
 }

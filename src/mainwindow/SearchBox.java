@@ -1,12 +1,10 @@
 package mainwindow;
 
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import twitch.TwitchStream;
-import application.Configuration;
-import application.TwitchBrowser;
+import application.ObservableTwitchBrowser;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -20,9 +18,9 @@ import javafx.scene.layout.VBox;
 import javafx.util.Callback;
 
 public class SearchBox extends VBox implements Initializable {
-	
-	private Configuration config;
-	
+
+	private ObservableTwitchBrowser browser;
+
 	private ObservableList<TwitchStream> list = FXCollections
 			.observableArrayList();
 
@@ -42,7 +40,9 @@ public class SearchBox extends VBox implements Initializable {
 					@Override
 					public ListCell<TwitchStream> call(
 							ListView<TwitchStream> param) {
-						return new SearchItemCell(config);
+						SearchItemCell cell = new SearchItemCell();
+						cell.setTwitchBrowser(browser);
+						return cell;
 					}
 
 				});
@@ -63,19 +63,17 @@ public class SearchBox extends VBox implements Initializable {
 	@FXML
 	private void handleSearchFieldKeyPressed(KeyEvent event) {
 		if (event.getCode() == KeyCode.ENTER) {
-			TwitchBrowser twitchBrowser = new TwitchBrowser();
-			ArrayList<TwitchStream> searchResult = twitchBrowser
-					.searchTerm(searchTextField.getText());
+			browser.searchTerm(searchTextField.getText());
 
 			list.clear();
-			if (searchResult != null) {
-				list.addAll(searchResult);
+			if (browser.getCurrentSearchResults() != null) {
+				list.addAll(browser.getCurrentSearchResults());
 			}
 
 		}
 	}
-	
-	public void setConfig(Configuration config) {
-		this.config = config;
+
+	public void setTwitchBrowser(ObservableTwitchBrowser browser) {
+		this.browser = browser;
 	}
 }

@@ -2,6 +2,7 @@ package application;
 
 import java.util.ArrayList;
 
+import twitch.SavedTwitchStream;
 import twitch.TwitchStreamContainerJson;
 import twitch.TwitchStream;
 import jsonretrieval.JsonHandler;
@@ -14,10 +15,12 @@ import jsonretrieval.JsonHandler;
  */
 public class TwitchBrowser {
 
-	JsonHandler handler = new JsonHandler();
+	private JsonHandler handler = new JsonHandler();
+	private ArrayList<TwitchStream> currentSearchResults;
+	private ArrayList<SavedTwitchStream> currentSavedStreams;
 
 	public TwitchBrowser() {
-
+		currentSavedStreams = new ArrayList<>();
 	}
 
 	/**
@@ -27,13 +30,28 @@ public class TwitchBrowser {
 	 *            The term to Search for
 	 * @return ArrayList of TwitchStreams returned from the search
 	 */
-	public ArrayList<TwitchStream> searchTerm(String term) {
+	public void searchTerm(String term) {
 		TwitchStreamContainerJson container = handler
 				.getSearchResultsTwitchStreamContainerJson(term);
 		if (container == null) {
-			return null;
+			return;
 		}
-		return container.getTwitchStreamList();
+		currentSearchResults = container.getTwitchStreamList();
+	}
+
+	public ArrayList<TwitchStream> getCurrentSearchResults() {
+		return currentSearchResults;
+	}
+
+	public ArrayList<SavedTwitchStream> getCurrentSavedStreams() {
+		return currentSavedStreams;
+	}
+
+	public void addToSavedStreams(TwitchStream stream) {
+		SavedTwitchStream toAdd = new SavedTwitchStream(stream.getName(), false);
+		if (!currentSavedStreams.contains(toAdd)) {
+			currentSavedStreams.add(toAdd);
+		}
 	}
 
 }
