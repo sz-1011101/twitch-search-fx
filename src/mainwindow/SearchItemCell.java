@@ -74,8 +74,9 @@ public class SearchItemCell extends ListCell<TwitchStream> {
 			cellNameLabel.setText(null);
 			setGraphic(null);
 		} else {
-			cellNameLabel.setText(item.getName() + "viewers: "
-					+ item.getViewers());
+			String displayText = item.getName() + "\nViewers: "
+					+ item.getViewers() + "\nGame: "+item.getGameName();
+			cellNameLabel.setText(displayText);
 			setGraphic(cellGrid);
 		}
 		this.setItem(item);

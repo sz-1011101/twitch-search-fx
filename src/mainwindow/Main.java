@@ -19,7 +19,7 @@ public class Main extends Application {
 			}
 			Parent root = new MainWindow();
 
-			Scene scene = new Scene(root, 600, 400);
+			Scene scene = new Scene(root, 800, 400);
 			stage.setTitle("Twitch Browser 0.1");
 			stage.setScene(scene);
 
