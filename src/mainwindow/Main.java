@@ -7,12 +7,12 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 
 public class Main extends Application {
+	
+	private static Configuration config = Configuration.loadConfiguration();;
+	
 	@Override
 	public void start(Stage stage) {
 		try {
-
-			Configuration config = Configuration.loadConfiguration();
-
 			// No config available, use default config
 			if (config == null) {
 				config = new Configuration();
@@ -23,11 +23,14 @@ public class Main extends Application {
 			stage.setTitle("Twitch Browser 0.1");
 			stage.setScene(scene);
 
-			((MainWindow) root).setConfig(config);
 			stage.show();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public static Configuration getConfig() {
+		return config;
 	}
 
 	public static void main(String[] args) {

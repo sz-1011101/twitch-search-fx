@@ -1,6 +1,5 @@
 package mainwindow;
 
-import application.Configuration;
 import configwindow.ConfigWindow;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -10,8 +9,6 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 public class MainWindow extends GridPane {
-	
-	private Configuration config;
 	
 	@FXML
 	SearchBox searchBox;
@@ -26,7 +23,7 @@ public class MainWindow extends GridPane {
 	@FXML
 	protected void handleConfigureButtonAction(ActionEvent event) {
 		System.out.println("ConfigureButton pressed");
-		Parent secondary = new ConfigWindow(config);
+		Parent secondary = new ConfigWindow();
 
 		Stage configStage = new Stage();
 		Scene scene = new Scene(secondary, 400, 100);
@@ -36,8 +33,4 @@ public class MainWindow extends GridPane {
 		configStage.show();
 	}
 
-	public void setConfig(Configuration config) {
-		this.config = config;
-		searchBox.setConfig(config);
-	}
 }

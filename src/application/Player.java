@@ -22,7 +22,7 @@ public class Player {
 				.getStreamURL().toExternalForm());
 
 		try {
-			Process playerProcess = pb.start();
+			pb.start();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

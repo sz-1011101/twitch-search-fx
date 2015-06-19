@@ -16,8 +16,6 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 public class SearchItemCell extends ListCell<TwitchStream> {
-
-	private Configuration config;
 	
 	private GridPane cellGrid = new GridPane();
 	private Button executeButton = new Button();
@@ -26,7 +24,6 @@ public class SearchItemCell extends ListCell<TwitchStream> {
 
 	public SearchItemCell(Configuration config) {
 		super();
-		this.config = config;
 		
 		setText(null); // Set normal text null, we use the label for that
 		
@@ -91,7 +88,6 @@ public class SearchItemCell extends ListCell<TwitchStream> {
 		Scene scene = new Scene(secondary, 200, 200);
 		selectorStage.setScene(scene);
 
-		((QualitySelector) secondary).setConfig(config);
 		// give data to the QualitySelector
 		((QualitySelector) secondary).passStreamInfo(info);
 		selectorStage.setTitle("Select quality");

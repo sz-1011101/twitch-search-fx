@@ -2,7 +2,6 @@ package configwindow;
 
 import java.io.File;
 
-import application.Configuration;
 import mainwindow.Utility;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -10,18 +9,16 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import javafx.stage.Window;
+
 
 public class ConfigWindow extends GridPane {
 
 	@FXML
 	private TextField playerPath;
-	private Configuration config;
 
-	public ConfigWindow(Configuration config) {
-		this.config = config;
+	public ConfigWindow() {
 		Utility.loadFXMLasRoot("config_window.fxml", this);
-		playerPath.setText(config.getPlayerPath());
+		playerPath.setText(mainwindow.Main.getConfig().getPlayerPath());
 	}
 
 	@FXML
@@ -39,8 +36,8 @@ public class ConfigWindow extends GridPane {
 
 	@FXML
 	protected void handleSaveButtonAction(ActionEvent event) {
-		config.setPlayerPath(playerPath.getText());
-		config.saveConfiguration();
+		mainwindow.Main.getConfig().setPlayerPath(playerPath.getText());
+		mainwindow.Main.getConfig().saveConfiguration();
 		Stage window = (Stage)this.getScene().getWindow();
 		window.close();
 	}

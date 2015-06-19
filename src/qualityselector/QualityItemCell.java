@@ -1,6 +1,5 @@
 package qualityselector;
 
-import application.Configuration;
 import application.Player;
 import twitch.StreamInfo.StreamQuality;
 import javafx.event.ActionEvent;
@@ -10,13 +9,10 @@ import javafx.scene.control.ListCell;
 
 public class QualityItemCell extends ListCell<StreamQuality> {
 
-	private Configuration config;
-
 	Button launchButton = new Button();
 
-	public QualityItemCell(Configuration config) {
+	public QualityItemCell() {
 		super();
-		this.config = config;
 
 		this.setText(null);
 
@@ -25,7 +21,7 @@ public class QualityItemCell extends ListCell<StreamQuality> {
 			@Override
 			public void handle(ActionEvent event) {
 				System.out.println("launchButton pressed");
-				Player player = new Player(config);
+				Player player = new Player(mainwindow.Main.getConfig());
 				player.openStream(getItem());
 			}
 

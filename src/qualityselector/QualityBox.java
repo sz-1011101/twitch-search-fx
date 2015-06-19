@@ -3,13 +3,11 @@ package qualityselector;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import application.Configuration;
 import mainwindow.Utility;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.FocusModel;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.VBox;
@@ -18,8 +16,6 @@ import twitch.StreamInfo;
 import twitch.StreamInfo.StreamQuality;
 
 public class QualityBox extends VBox implements Initializable {
-
-	private Configuration config;
 
 	private ObservableList<StreamQuality> list = FXCollections
 			.observableArrayList();
@@ -40,7 +36,7 @@ public class QualityBox extends VBox implements Initializable {
 					@Override
 					public ListCell<StreamQuality> call(
 							ListView<StreamQuality> param) {
-						return new QualityItemCell(config);
+						return new QualityItemCell();
 					}
 
 				});
@@ -53,9 +49,5 @@ public class QualityBox extends VBox implements Initializable {
 		for (StreamQuality q : info.getQualities()) {
 			list.add(q);
 		}
-	}
-
-	public void setConfig(Configuration config) {
-		this.config = config;
 	}
 }
