@@ -3,7 +3,7 @@ package twitch;
 public class SavedTwitchStream {
 
 	private String name;
-	private boolean online;
+	private transient boolean online;
 
 	public SavedTwitchStream(String name, boolean online) {
 		this.name = name;

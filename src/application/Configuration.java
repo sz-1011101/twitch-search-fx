@@ -11,7 +11,8 @@ public class Configuration {
 
 	public static final String CONFIG_PATH = "configuration.json";
 	private String playerPath;
-
+	private boolean debug;
+	
 	public String getPlayerPath() {
 		return playerPath;
 	}
@@ -27,8 +28,6 @@ public class Configuration {
 	public void setDebug(boolean debug) {
 		this.debug = debug;
 	}
-
-	private boolean debug;
 
 	/**
 	 * Default Ctor sets playerPath null, debug false

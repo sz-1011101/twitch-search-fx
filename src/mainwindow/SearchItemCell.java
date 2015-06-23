@@ -66,7 +66,6 @@ public class SearchItemCell extends ListCell<TwitchStream> {
 			public void handle(ActionEvent event) {
 				System.out.println("Save button pressed"); // Dummy action
 				browser.addToSavedStreams(getItem());
-				browser.notifyInvalidated();
 			}
 
 		});

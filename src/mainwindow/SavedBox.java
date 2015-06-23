@@ -3,6 +3,7 @@ package mainwindow;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import twitch.SavedStreams;
 import twitch.SavedTwitchStream;
 import application.ObservableTwitchBrowser;
 import javafx.collections.FXCollections;
@@ -49,6 +50,10 @@ public class SavedBox extends VBox implements Initializable {
 
 	public void refresh() {
 		list.clear();
-		list.addAll(browser.getCurrentSavedStreams());
+
+		SavedStreams streams = browser.getCurrentSavedStreams();
+		if (streams != null && streams.getStreams() != null) {
+			list.addAll(streams.getStreams());
+		}
 	}
 }

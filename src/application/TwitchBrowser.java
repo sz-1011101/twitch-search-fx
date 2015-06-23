@@ -2,6 +2,7 @@ package application;
 
 import java.util.ArrayList;
 
+import twitch.SavedStreams;
 import twitch.SavedTwitchStream;
 import twitch.TwitchStreamContainerJson;
 import twitch.TwitchStream;
@@ -17,10 +18,13 @@ public class TwitchBrowser {
 
 	private JsonHandler handler = new JsonHandler();
 	private ArrayList<TwitchStream> currentSearchResults;
-	private ArrayList<SavedTwitchStream> currentSavedStreams;
+	private SavedStreams currentSavedStreams;
 
 	public TwitchBrowser() {
-		currentSavedStreams = new ArrayList<>();
+		currentSavedStreams = SavedStreams.loadStreams();
+		if (currentSavedStreams == null) {
+			currentSavedStreams = new SavedStreams();
+		}
 	}
 
 	/**
@@ -43,15 +47,18 @@ public class TwitchBrowser {
 		return currentSearchResults;
 	}
 
-	public ArrayList<SavedTwitchStream> getCurrentSavedStreams() {
+	public SavedStreams getCurrentSavedStreams() {
 		return currentSavedStreams;
 	}
 
 	public void addToSavedStreams(TwitchStream stream) {
 		SavedTwitchStream toAdd = new SavedTwitchStream(stream.getName(), false);
-		if (!currentSavedStreams.contains(toAdd)) {
-			currentSavedStreams.add(toAdd);
+		if (currentSavedStreams.getStreams() != null
+				&& !currentSavedStreams.getStreams().contains(toAdd)) {
+			currentSavedStreams.getStreams().add(toAdd);
 		}
+
+		currentSavedStreams.saveStreams();
 	}
 
 }

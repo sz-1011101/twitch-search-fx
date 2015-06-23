@@ -10,6 +10,7 @@ public class CurrentSavedListener implements InvalidationListener {
 	
 	public CurrentSavedListener(SavedBox savedBox) {
 		this.savedBox = savedBox;
+		savedBox.refresh();
 	}
 	
 	@Override
