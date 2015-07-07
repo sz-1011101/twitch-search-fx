@@ -52,13 +52,18 @@ public class TwitchBrowser {
 	}
 
 	public void addToSavedStreams(TwitchStream stream) {
-		SavedTwitchStream toAdd = new SavedTwitchStream(stream.getName(), false);
+		SavedTwitchStream toAdd = new SavedTwitchStream(stream.getName());
 		if (currentSavedStreams.getStreams() != null
 				&& !currentSavedStreams.getStreams().contains(toAdd)) {
 			currentSavedStreams.getStreams().add(toAdd);
 		}
 
 		currentSavedStreams.saveStreams();
+	}
+
+	public void refreshSavedStreams() {
+		// TODO
+		
 	}
 
 }

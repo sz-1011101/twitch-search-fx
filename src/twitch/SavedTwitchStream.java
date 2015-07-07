@@ -3,11 +3,11 @@ package twitch;
 public class SavedTwitchStream {
 
 	private String name;
-	private transient boolean online;
+	private transient boolean online = false;
+	private transient TwitchStream stream;
 
-	public SavedTwitchStream(String name, boolean online) {
+	public SavedTwitchStream(String name) {
 		this.name = name;
-		this.online = online;
 	}
 
 	public String getName() {
@@ -33,6 +33,11 @@ public class SavedTwitchStream {
 		} else if (!name.equals(other.name))
 			return false;
 		return true;
+	}
+
+	public void refreshStatus() {
+		// TODO
+		
 	}
 
 }

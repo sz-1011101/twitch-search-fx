@@ -117,18 +117,22 @@ public class TwitchStreamContainerJson {
 		}
 
 	}
-	
+
 	public ArrayList<TwitchStream> getTwitchStreamList() {
 		ArrayList<TwitchStream> result = new ArrayList<>();
-		
-		for (Stream s: streams) {
+
+		for (Stream s : streams) {
 			try {
-				result.add(new TwitchStream(s.channel.name, new URL(s.channel.url), s.game, s.viewers));
+				if (s.channel.url != null && s.channel.name != null
+						&& s.game != null) {
+					result.add(new TwitchStream(s.channel.name, new URL(
+							s.channel.url), s.game, s.viewers));
+				}
 			} catch (MalformedURLException e) {
 				e.printStackTrace();
 			}
 		}
-		
+
 		return result;
 	}
 

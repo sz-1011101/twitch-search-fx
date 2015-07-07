@@ -17,7 +17,7 @@ public class SavedStreams {
 		streams = new ArrayList<>();
 	}
 
-	public ArrayList<SavedTwitchStream> getStreams() {
+	public synchronized ArrayList<SavedTwitchStream> getStreams() {
 		return streams;
 	}
 
@@ -33,7 +33,7 @@ public class SavedStreams {
 		}
 	}
 
-	public void saveStreams() {
+	public synchronized void saveStreams() {
 		Gson gson = new Gson();
 		String jsonStreams = gson.toJson(this);
 
@@ -42,6 +42,13 @@ public class SavedStreams {
 					jsonStreams);
 		} catch (IOException e) {
 			e.printStackTrace();
+		}
+	}
+
+	public synchronized void refreshStreams() {
+		System.out.println("Refreshing status of streams...");
+		for (SavedTwitchStream s : streams) {
+			s.refreshStatus();
 		}
 	}
 }
