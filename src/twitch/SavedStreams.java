@@ -21,10 +21,23 @@ public class SavedStreams {
 		return streams;
 	}
 
+	public synchronized void addSavedStream(SavedTwitchStream stream) {
+		streams.add(stream);
+	}
+
+	public synchronized boolean containsSavedStream(SavedTwitchStream stream) {
+		return streams.contains(stream);
+	}
+
+	public synchronized void removeSavedStream(SavedTwitchStream stream) {
+		if (streams.contains(stream)) {
+			streams.remove(stream);
+		}
+	}
+
 	public static SavedStreams loadStreams() {
 		try {
-			String jsonStreams = FileUtility.loadStringFromFile(new File(
-					SAVED_STREAMS_PATH));
+			String jsonStreams = FileUtility.loadStringFromFile(new File(SAVED_STREAMS_PATH));
 			Gson gson = new Gson();
 			return gson.fromJson(jsonStreams, SavedStreams.class);
 		} catch (IOException e) {
@@ -38,8 +51,7 @@ public class SavedStreams {
 		String jsonStreams = gson.toJson(this);
 
 		try {
-			FileUtility.writeStringIntoFile(new File(SAVED_STREAMS_PATH),
-					jsonStreams);
+			FileUtility.writeStringIntoFile(new File(SAVED_STREAMS_PATH), jsonStreams);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

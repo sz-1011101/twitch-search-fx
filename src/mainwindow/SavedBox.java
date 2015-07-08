@@ -41,7 +41,9 @@ public class SavedBox extends VBox implements Initializable {
 					@Override
 					public ListCell<SavedTwitchStream> call(
 							ListView<SavedTwitchStream> param) {
-						return new SavedItemCell();
+						SavedItemCell cell = new SavedItemCell();
+						cell.setTwitchBrowser(browser);
+						return cell;
 					}
 
 				});
